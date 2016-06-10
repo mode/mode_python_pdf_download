@@ -1,4 +1,4 @@
-import json, requests, datetime, ConfigParser, urllib2
+import json, requests, datetime, ConfigParser, argparse
 from requests.auth import HTTPBasicAuth
 
 
@@ -25,13 +25,28 @@ def get_pdf(url, auth):
 	response = requests.get(url, auth=auth, stream=True)
 	return response
 
+
+
+
 def get_mode_json():
+
+
+	if __name__ == '__main__':
+	    parser = argparse.ArgumentParser()
+	    parser.add_argument('-token', '--token')
+	    parser.add_argument('-password', '--password')
+	    args = parser.parse_args()
+
+	    if(args.token is not None and args.password is not None):
+	    	auth = (args.token, args.password)
+	    else:
+	    	auth = get_auth()
+
 
 	mode_url = 'https://modeanalytics.com'
 	#Set API URL for your report
-	api_url = '/api/{{organization_username}}/reports/{{report_token}}'
+	api_url = '/api/modeanalytics/reports/287cb906e6bd'
 
-	auth = get_auth()
 
 	url = mode_url + api_url
 
@@ -53,20 +68,30 @@ def get_mode_json():
 
 	links = data['_links']
 
-	href = links['download']
 
-	href = href['href']
-	
-	pdf_url = mode_url + href
-	pdf = get_pdf(pdf_url, auth)
+	try:
 
-	print pdf
+		filename = data['filename']
 
-	
-	file = open("document.pdf", 'w')
-	file.write(pdf.content)
-	file.close()
+		href = links['download']
 
+		href = href['href']
+		
+		pdf_url = mode_url + href
+
+		pdf = get_pdf(pdf_url, auth)
+
+		
+		file = open(filename, 'w')
+		file.write(pdf.content)
+		file.close()
+
+	except:
+		print 'We had trouble getting your PDF.  Please make sure you have a download link at: '
+		href = links['self']
+		href = href['href']
+		print mode_url + href
+		print 'If not, you may have a download link you may have to re-export a PDF version of your report.'
 	
 
 get_mode_json()
