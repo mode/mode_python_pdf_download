@@ -8,5 +8,5 @@ This script allows users to download PDF's from email shared reports that includ
 2.  In Mode, generate API token (under Settings -> Organization Name -> API Tokens) for the organization in which your report resides.
 2.  Either add the token and password values to the python.properties file or you can use the token and password as flags when running the script:   
 `python pdf.py -token={{token_string}} -password={{password_string}}`
-3.  In pdf.py, set the api_url organization_username and report_token values in the get_mode_json() method. 
+3.  In pdf.py, set the api_url `{{organization_username}}` and `{{report_token}}` values in the get_mode_json() method. 
 4.  Run the script using `python pdf.py`
