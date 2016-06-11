@@ -74,7 +74,6 @@ def get_mode_json():
 		href = links['self']
 		href = href['href']
 		print mode_url + href
-		print 'If not, you may have a download link you may have to re-export a PDF version of your report.'
-	
+		print 'If not, you may have to re-export a PDF version of your report.'
 
 get_mode_json()
