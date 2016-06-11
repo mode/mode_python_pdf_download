@@ -1,4 +1,4 @@
-import json, requests, datetime, ConfigParser, argparse
+import json, requests, datetime, ConfigParser, argparse, sys
 from requests.auth import HTTPBasicAuth
 
 
@@ -36,9 +36,16 @@ def get_mode_json():
 	auth = get_auth()
 
 	mode_url = 'https://modeanalytics.com'
-	api_url = '/api/' + args.org + '/reports/' + args.report
-	url = mode_url + api_url
 
+	api_url = ''
+
+	if(args.org is not None and args.report is not None):
+		api_url = '/api/' + args.org + '/reports/' + args.report
+	else:
+		sys.exit('We did not get your -org or -report parameters.')
+
+	url = mode_url + api_url
+	
 	data = get_response_json(url, auth, True)
 
 	links = data['_links']
