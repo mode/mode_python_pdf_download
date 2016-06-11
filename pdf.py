@@ -2,7 +2,6 @@ import json, requests, datetime, ConfigParser, argparse
 from requests.auth import HTTPBasicAuth
 
 
-
 def get_auth():
 
 	#Set location of python.properties file
@@ -25,27 +24,22 @@ def get_pdf(url, auth):
 	response = requests.get(url, auth=auth, stream=True)
 	return response
 
-
-
-
 def get_mode_json():
 
 
 	if __name__ == '__main__':
 	    parser = argparse.ArgumentParser()
-	    parser.add_argument('-token', '--token')
-	    parser.add_argument('-password', '--password')
+	    parser.add_argument('-org', '--org')
+	    parser.add_argument('-report', '--report')
 	    args = parser.parse_args()
 
-	    if(args.token is not None and args.password is not None):
-	    	auth = (args.token, args.password)
-	    else:
-	    	auth = get_auth()
+
+	auth = get_auth()
 
 
 	mode_url = 'https://modeanalytics.com'
 	#Set API URL for your report
-	api_url = '/api/modeanalytics/reports/287cb906e6bd'
+	api_url = '/api/' + args.org + '/reports/' + args.report
 
 
 	url = mode_url + api_url
@@ -78,6 +72,8 @@ def get_mode_json():
 		href = href['href']
 		
 		pdf_url = mode_url + href
+
+		print pdf_url
 
 		pdf = get_pdf(pdf_url, auth)
 
