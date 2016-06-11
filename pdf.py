@@ -57,7 +57,6 @@ def get_mode_json():
 
 	links = data['_links']
 
-
 	try:
 
 		filename = data['filename']
@@ -70,6 +69,7 @@ def get_mode_json():
 		file.close()
 
 	except:
+
 		print 'We had trouble getting your PDF.  Please make sure you have a download link at: '
 		href = links['self']
 		href = href['href']
