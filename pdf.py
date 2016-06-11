@@ -78,9 +78,3 @@ def get_mode_json():
 	
 
 get_mode_json()
-
-
-
-
-
-
