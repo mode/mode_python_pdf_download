@@ -9,7 +9,7 @@ This script allows users to download PDF's from email shared reports that includ
 3.  Add the token and password values to the python.properties file.
 4.  Run the script using `python pdf.py -org={{organization_username}} -report={{report_token}}`
 
-For example, for this report https://modeanalytics.com/modeanalytics/reports/123456abcdef I would run:
+For example, for this report https://modeanalytics.com/modeanalytics/reports/eb7e7c23e72f I would run:
 
 `python pdf.py -org=modeanalytics -report=123456abcdef`
 
