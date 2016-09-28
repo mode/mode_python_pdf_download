@@ -11,5 +11,5 @@ This script allows users to download PDF's from email shared reports that includ
 
 For example, for this report https://modeanalytics.com/modeanalytics/reports/eb7e7c23e72f I would run:
 
-`python pdf.py -org=modeanalytics -report=123456abcdef`
+`python pdf.py -org=modeanalytics -report=eb7e7c23e72f`
 
